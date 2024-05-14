@@ -1,0 +1,322 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+#include<dos.h>
+#include<math.h>
+void wind(float x[7],float y[7])
+{
+	setcolor(0);
+	for(int i=0;i<3;i++)
+	{
+		line(515+i,420,535+i,140);
+		line(565+i,140,585+i,420);
+		circle(550,180,5+i);
+		arc(550+i,180,65,110,42);
+		arc(550+i,350,245,298,78);
+		setfillstyle(1,6);
+		floodfill(0,360,0);
+		for(int j=1;j<=6;j++)
+		{
+			line(x[0]+i,y[0],x[0]+x[j]+i,y[0]-y[j]);
+		}
+		for(int j=1;j<6;j+=2)
+		{
+			line(x[0]+x[j]+i,y[0]-y[j],x[0]+x[j+1]+i,y[0]-y[j+1]);
+		}
+	}
+}
+void windmill(float x[7],float y[7])
+{
+	float xw1,yw1,xw2,yw2;
+	float theta=30;
+	wind(x,y);
+	for(int i=1;i<6;i+=2)
+	{
+		xw1=cos(theta)*x[i]+sin(theta)*y[i];
+		yw1=-sin(theta)*x[i]+cos(theta)*y[i];
+		xw2=cos(theta)*x[i+1]+sin(theta)*y[i+1];
+		yw2=-sin(theta)*x[i+1]+cos(theta)*y[i+1];
+		x[i]=xw1;
+		y[i]=yw1;
+		x[i+1]=xw2;
+		y[i+1]=yw2;
+	}	
+	delay(50);
+}
+void wind1(float x[7],float y[7])
+{
+	setcolor(0);
+	for(int i=0;i<3;i++)
+	{
+		line(515+i,420,535+i,140);
+		line(565+i,140,585+i,420);
+		circle(550,180,5+i);
+		arc(550+i,180,65,110,42);
+		arc(550+i,350,245,298,78);
+		setfillstyle(1,6);
+		floodfill(0,360,0);
+		for(int j=1;j<=6;j++)
+		{
+			if(j==1||j==2)
+				continue;
+			else
+				line(x[0]+i,y[0],x[0]+x[j]+i,y[0]-y[j]);
+		}
+		for(int j=1;j<6;j+=2)
+		{
+			if(j==1)
+				continue;
+			else
+				line(x[0]+x[j]+i,y[0]-y[j],x[0]+x[j+1]+i,y[0]-y[j+1]);
+		}
+	}
+}
+void windmill1(float x[7],float y[7])
+{
+	float xw1,yw1,xw2,yw2;
+	float theta=30;
+	wind1(x,y);
+	for(int i=1;i<6;i+=2)
+	{
+		xw1=cos(theta)*x[i]+sin(theta)*y[i];
+		yw1=-sin(theta)*x[i]+cos(theta)*y[i];
+		xw2=cos(theta)*x[i+1]+sin(theta)*y[i+1];
+		yw2=-sin(theta)*x[i+1]+cos(theta)*y[i+1];
+		x[i]=xw1;
+		y[i]=yw1;
+		x[i+1]=xw2;
+		y[i+1]=yw2;
+	}	
+	delay(50);
+}
+void ball(int s,int sp)
+{
+	for(int i=0;i<3;i++)
+	{
+		setcolor(5);
+		circle(0+s,360+sp,12+i);
+		
+	}
+	setfillstyle(1,1);
+	floodfill(0+s,360+sp,5);
+	setcolor(6);
+	ellipse(0+s,360+sp,0,360,12,5);
+	line(0+s,348+sp,0+s,372+sp);
+}
+void stickmans(int s)
+{
+	for(int i=0;i<3;i++)
+	{
+		setcolor(BLACK);
+		ellipse(50+s,334,0,360,12+i,18+i);
+		line(50+i+s,352,50+i+s,400);
+		line(50+i+s,400,30+i+s,450);
+		line(50+i+s,400,70+i+s,450);
+		line(50+s+i,360,30+s+i,395);
+		line(50+s,360+i,70+s,395+i);
+	}
+	setfillstyle(1,12);
+	floodfill(50+s,334,0);
+}
+void stickmane(int s,int sp)
+{
+	for(int i=0;i<3;i++)
+	{
+		setcolor(BLACK);
+		ellipse(50+s,334,0,360,12+i,18+i);
+		line(50+i+s,352,50+i+s,400);
+		line(50-i+s,400,50-i+s,450);
+		line(50+i+s,400,50+i+sp,450);
+		line(50+s+i,360,30+s+i,395);
+		line(50+s,360+i,70+s,395+i);
+	}
+	setfillstyle(1,12);
+	floodfill(50+s,334,0);
+}
+void color()
+{
+	setcolor(0);
+	line(0,450,700,450);
+	setfillstyle(1,2);
+	floodfill(10,460,0);
+	line(0,280,525,280);
+	line(575,280,700,280);
+	setfillstyle(1,10);
+	floodfill(10,440,0);
+	line(0,260,90,190);
+	line(90,190,180,265);
+	line(180,265,240,220);
+	line(240,220,300,265);
+	line(300,265,400,210);
+	line(400,210,480,275);
+	line(480,275,530,260);
+	line(575,265,600,275);
+	line(600,275,700,230);
+	setfillstyle(1,11);
+	floodfill(20,200,0);
+	setfillstyle(1,7);
+	floodfill(80,210,0);
+	setfillstyle(1,7);
+	floodfill(650,270,0);
+	circle(150,100,20);
+	setfillstyle(1,14);
+	floodfill(150,100,0);
+	line(150,75,150,70);
+	line(170,75,165,80);
+	line(175,100,180,100);
+	line(170,125,165,120);
+	line(150,125,150,130);
+	line(125,125,130,120);
+	line(120,100,125,100);
+	line(125,75,130,80);
+}
+void windpiece(int s,int sp)
+{
+	for(int i=0;i<3;i++)
+	{
+		setcolor(8);
+		line(545+i+s,180+sp,615+s+i,190+sp);
+		line(545+i+s,180+sp,620+s+i,170+sp);
+		line(615+s+i,190+sp,620+s+i,170+sp);
+	}
+	setfillstyle(1,6);
+	floodfill(565+s,180+sp,8);
+}
+main()
+{
+	initwindow(700,550,"Stickman",150,50);
+	float x[7],y[7];
+	int page=0,n=0,sb=0,sb1=0,sw=0,sw1=0,sp=0,sp1=0;
+	x[0]=550;
+	y[0]=180;
+	x[1]=y[4]=x[2]=-80;
+	y[6]=y[5]=y[1]=50;
+	y[2]=25;
+	y[3]=-90;
+	x[4]=10;
+	x[3]=-10;
+	x[5]=80;
+	x[6]=55;
+	setbkcolor(15);
+	while(n<300)
+	{
+		setactivepage(page);
+		setvisualpage(1-page);
+		cleardevice();
+		if(n<128)
+		{
+			windmill(x,y);
+			color();
+		}
+		if(n>=20&&n<30)
+		{
+			ball(sb,sb1);
+			sb+=8;
+			sb1+=8;
+		}
+		if(n>=30&&n<35)
+		{
+			ball(sb,sb1);
+			sb+=5;
+			sb1-=5;
+		}
+		if(n>=35&&n<40)
+		{
+			ball(sb,sb1);
+			sb+=5;
+			sb1+=5;
+		}
+		if(n>=40&&n<65)
+		{
+			ball(sb,sb1);
+			sb+=8;
+		}
+		if(n>=65&&n<130)
+		{
+			ball(sb,sb1);
+		}
+		if(n>=70&&n<100)
+		{
+			if(n%2==0)
+			stickmans(sw);
+			else
+			stickmane(sw,sw1);
+			sw+=8;
+			sw1+=8;
+		}
+		if(n>=100&&n<105)
+		{
+			stickmane(sw,sw1);
+			rectangle(285,335,295,340);
+			setfillstyle(1,15);
+			floodfill(290,338,0);
+		}
+		if(n>=105&&n<108)
+		{
+			stickmane(sw,sw1);
+			sw1-=8;
+		}
+		if(n>=108&&n<114)
+		{
+			stickmane(sw,sw1);
+			sw1+=8;
+		}
+		if(n>=114&&n<117)
+		{
+			stickmane(sw,sw1);
+			sw1-=8;
+		}
+		if(n>=114&&n<128)
+		{
+			ball(sb,sb1);
+			sb+=15;
+			sb1-=15;
+		}
+		if(n>=117&&n<128)
+		{
+			stickmane(sw,sw1);
+		}
+		if(n>=128&&n<150)
+		{
+			windmill1(x,y);
+			color();
+			ball(sb,sb1);
+			sb-=25;
+			sb1-=25;
+			stickmane(sw,sw1);
+			circle(290,340,5);
+			setfillstyle(1,15);
+			floodfill(290,340,0);
+		}
+		if(n>=150)
+		{
+			windmill1(x,y);
+			color();
+		}
+		if(n>=128&&n<140)
+		{
+			windpiece(sp,sp1);
+			sp+=20;
+			sp1+=25;
+		}
+		if(n>=150&n<155)
+		{
+			stickmane(sw,sw1);
+		}
+		if(n>=155&n<170)
+		{
+			if(n%2==0)
+			stickmans(sw);
+			else
+			stickmane(sw,sw1);
+			sw-=25;
+			sw1-=25;
+		}
+		page=(1-page);
+		delay(5);
+		n++;
+	}
+			setactivepage(1);
+	getch();
+	closegraph();
+}
